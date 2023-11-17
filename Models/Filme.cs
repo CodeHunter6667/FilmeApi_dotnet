@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FilmesApi.Models
 {
+    [Table("tb_filmes")]
     public class Filme
     {
+        [Key]
+        [Required]
         public long Id { get; set; }
         [Required(ErrorMessage = "O titulo do filme é obrigatorio")]
         [MaxLength(50, ErrorMessage = "O titulo do filme deve ter no maximo 50 caracteres")]
