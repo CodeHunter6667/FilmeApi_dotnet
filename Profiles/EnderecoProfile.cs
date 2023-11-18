@@ -9,7 +9,7 @@ public class EnderecoProfile : Profile
     public EnderecoProfile()
     {
         CreateMap<CreateEnderecoDto, Endereco>();
-        CreateMap<UpdateCinemaDto, Endereco>().ReverseMap();
-        CreateMap<Endereco, ReadCinemaDto>();
+        CreateMap<UpdateEnderecoDto, Endereco>().ReverseMap();
+        CreateMap<Endereco, ReadEnderecoDto>();
     }
 }
