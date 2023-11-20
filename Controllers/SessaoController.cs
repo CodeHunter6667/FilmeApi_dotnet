@@ -24,22 +24,22 @@ public class SessaoController : ControllerBase
         return _mapper.Map<List<ReadSessaoDto>>(_context.Sessoes.ToList());
     }
 
-    [HttpGet("{id:int}")]
-    public ActionResult<ReadEnderecoDto> RecuperaSessaoPorId(int id)
+    [HttpGet("{filmeId:int}/{cinemaId:int}")]
+    public ActionResult<ReadEnderecoDto> RecuperaSessaoPorId(int filmeId, int cinemaId)
     {
-        var sessao = _context.Sessoes.FirstOrDefault(e => e.Id == id);
+        var sessao = _context.Sessoes.FirstOrDefault(e => e.FilmeId == filmeId && e.CinemaId == cinemaId);
         if (sessao == null) return NotFound();
         var sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
         return Ok(sessaoDto);
     }
 
     [HttpPost]
-    public ActionResult<CreateEnderecoDto> AdicionaEndereco(CreateSessaoDto dto)
+    public ActionResult<CreateEnderecoDto> AdicionaEndereco([FromBody] CreateSessaoDto dto)
     {
         if (dto == null) return BadRequest();
         var sessao = _mapper.Map<Sessao>(dto);
         _context.Sessoes.Add(sessao);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(RecuperaSessaoPorId), new { Id = sessao.Id }, dto);
+        return CreatedAtAction(nameof(RecuperaSessaoPorId), new { filmeId = sessao.FilmeId, cinemaId = sessao.CinemaId }, dto);
     }
 }
