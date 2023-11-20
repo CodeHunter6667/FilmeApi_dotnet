@@ -2,6 +2,6 @@
 
 public class CreateSessaoDto
 {
-    public long FilmeId { get; set; }
+    public int FilmeId { get; set; }
     public int CinemaId { get; set; }
 }
